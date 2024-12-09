@@ -1,20 +1,22 @@
 ---
-
+import Countdown from './Countdown';
+import 'animate.css';
 ---
 <div class="relative h-screen w-screen bg-marfil flex flex-col justify-center items-center overflow-hidden">
-	<div class="flex flex-col justify-center items-center gap-9 z-10">
-		<div class="relative w-full flex flex-col justify-center items-center">
-			<h3 class="text-[#333] font-cinzelDecorative text-6xl ">SAVE THE DATE</h3>
+	<div class="flex flex-col justify-center items-center gap-9 z-10 ">
+		<div class="relative w-full flex flex-col justify-center items-center  ">
+			<h3 class="text-[#333] font-cinzelDecorative text-6xl animate__animated animate__slideInDown animate__slower">SAVE THE DATE</h3>
 			<!-- <h5 class="text-[#333] font-playfairDisplay text-xl">SÁBADO, 30 DE MARZO DE 2024, RECEPCIÓN A LAS 17:00</h5> -->
-			<div class=" w-1/2 mt-9 flex flex-col justify-center items-center">
+			<div class=" w-1/2 mt-9 flex flex-col justify-center items-center animate__animated animate__slideInDown animate__slower">
 				<img class="-ml-8" 
 				src="/img/minimalist_heart_2.png" 
 				alt="" srcset="">
 			</div>
 		</div>
 		<div class="">
-			<h1 class="text-[#333] font-greatVibes text-9xl">Fernanda y Ernesto</h1>
+			<h1 class="text-[#333] font-greatVibes text-9xl animate__animated animate__zoomIn animate__slower animate__slower">Fernanda y Ernesto</h1>
 		</div>
+		<Countdown client:load/>
 	</div>
 	<div class="w-full flex flex-row justify-center items-center mt-16">
 		<button class="
@@ -25,12 +27,13 @@
 		transition-all
 		duration-500
 		hover:scale-110
+		animate__animated animate__zoomIn animate__slower
 		">
 			Reserva tu lugar
 		</button>
 	</div>
 
-	<div class="absolute w-1/5 h-fit z-0 -bottom-7 left-0 flex flex-col justify-end">
+	<div class="absolute w-1/5 h-fit z-0 -bottom-7 left-0 flex flex-col justify-end animate__animated animate__rotateInDownLeft">
 			<img class="relative w-full h-auto" 
 			src="/img/Minimalist-line-art-of-a-man-proposing-to-a-woman.svg" 
 			alt="" srcset="">
