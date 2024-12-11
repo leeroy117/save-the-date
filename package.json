@@ -14,10 +14,12 @@
     "@fontsource-variable/playfair-display": "^5.1.0",
     "@fontsource/cinzel-decorative": "^5.1.0",
     "@fontsource/great-vibes": "^5.1.0",
+    "@nanostores/react": "^0.8.2",
     "@types/react": "^18.3.14",
     "@types/react-dom": "^18.3.3",
     "animate.css": "^4.1.1",
     "astro": "^5.0.1",
+    "nanostores": "^0.11.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^3.4.16"
