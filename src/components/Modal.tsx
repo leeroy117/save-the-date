@@ -9,10 +9,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = () => {
-//   console.log("🚀 ~ isOpen:", isOpen)
-//   if (!isOpen) return null; 
   const $isModalOpen = useStore(isModalOpen);
-
 
   const onHandleSend = (e: any) => {
     e.preventDefault();
@@ -21,11 +18,12 @@ const Modal: React.FC<ModalProps> = () => {
 
   console.log('modalopen', $isModalOpen);
   return (
+    // ${$isModalOpen ? 'absolute animate__animated animate__fadeInDown animate__faster' : 'hidden'}
     <div className={` w-[100svw] 
     h-screen top-0 inset-0 bg-transparent 
     bg-opacity-50 flex justify-center items-center 
     box-border
-    ${$isModalOpen ? 'absolute animate__animated animate__fadeInDown animate__faster' : 'hidden'}
+    ${$isModalOpen ? 'absolute animate__animated animate__fadeInDown' : 'hidden'}
     z-50`}>
       <div className="bg-primary rounded-lg w-full flex flex-col justify-center items-center">
 
@@ -37,7 +35,10 @@ const Modal: React.FC<ModalProps> = () => {
             </svg>
           </button>
         </div>
-        <form className="flex flex-col justify-center items-center gap-2">
+        <h2 className="text-xl font-bold font-cinzelDecorative text-center mb-2">¡Confirma tu asistencia!</h2>
+        <p className="text-sm text-gray-600 text-center font-playfairDisplay">¡Qué alegría que estés con nosotros! Confirma tu asistencia y celebremos juntos.</p>
+
+        <form className="flex flex-col justify-center items-center gap-2 mt-3">
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Nombre" />
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Apellidos" />
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="number" placeholder="Teléfono" />
