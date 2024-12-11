@@ -1,6 +1,8 @@
 ---
 import Countdown from './Countdown';
+import Button from './Button';
 import 'animate.css';
+import Modal from './Modal';
 ---
 <div class="relative h-screen w-screen bg-marfil flex flex-col justify-start items-center overflow-x-hidden 
 	p-2
@@ -44,7 +46,7 @@ import 'animate.css';
 		relative
 		z-20
 	">
-		<button class="
+		<!-- <button class="
 			
 			
 			text-lg text-[#333] p-4 px-8 rounded-md shadow-cButtonShadow 
@@ -59,7 +61,8 @@ import 'animate.css';
 			lg:mt-2 
 		">
 			Reserva tu lugar
-		</button>
+		</button> -->
+		<Button client:load/>
 	</div>
 
 	<div class="relative
@@ -81,4 +84,7 @@ import 'animate.css';
 			alt="" srcset="">
 	</div>
 	
+	<!-- <Modal >
+
+	</Modal> -->
 </div>
