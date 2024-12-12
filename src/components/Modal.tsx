@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { isModalOpen } from '../modalStore';
 import { useStore } from '@nanostores/react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
 interface ModalProps {
 //   isOpen: boolean; 
 //   onClose: () => void; 
   // children: React.ReactNode; 
 }
+
+export const validationCommentSchema = Yup.object({
+  name: Yup.string().required('El Nombre es requerido'),
+  lastname: Yup.string().required('El Apellido es requerido'),
+  phone: Yup.string().required('El Telefono es requerido').matches(
+    /^[0-9]{10}$/, // Expresión regular para un número de 10 dígitos
+    'El teléfono debe tener exactamente 10 dígitos numéricos'
+  ),
+});
 
 const Modal: React.FC<ModalProps> = () => {
   const $isModalOpen = useStore(isModalOpen);
@@ -38,7 +49,94 @@ const Modal: React.FC<ModalProps> = () => {
         <h2 className="text-xl font-bold font-cinzelDecorative text-center mb-2">¡Confirma tu asistencia!</h2>
         <p className="text-sm text-gray-600 text-center font-playfairDisplay">¡Qué alegría que estés con nosotros! Confirma tu asistencia y celebremos juntos.</p>
 
-        <form className="flex flex-col justify-center items-center gap-2 mt-3">
+        <Formik
+        initialValues={{
+          name: '',
+          lastname: '',
+          phone: '',
+        }}
+        validationSchema={validationCommentSchema}
+        onSubmit={(values, {setSubmitting}) => {
+          try {
+            // dispatch(updateComment({id: id, comment: values.comment, email: values.email}))
+            // setSubmitting(false);
+            // closeModal();
+          } catch (error) {
+            console.log("🚀 ~ FormAddComment ~ error:", error)
+            
+          }
+        }}
+      >
+      {({isValid, dirty, isSubmitting}) => (
+        <Form> 
+            <div className='flex flex-col justify-center items-center gap-4 w-full'>
+                <div className="w-full">
+                    <Field
+                        className='w-full h-12 p-4 rounded-md bg-[#EEE9DF] text-black placeholder-gray-400'
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder={'Juan'}
+                    />
+                    <ErrorMessage name="name" component="div" className="text-black" />
+                </div>
+
+                <div className="w-full">
+                    <Field
+                        className='w-full h-12 p-4 rounded-md bg-[#EEE9DF] text-black placeholder-gray-400'
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        placeholder={'García'}
+                    />
+                    <ErrorMessage name="lastname" component="div" className="text-black" />
+                </div>
+
+                <div className="w-full">
+                    <Field
+                        className='w-full h-12 p-4 rounded-md bg-[#EEE9DF] text-black placeholder-gray-400'
+                        type="number"
+                        id="phone"
+                        name="phone"
+                        placeholder={'6671234567'}
+                    />
+                    <ErrorMessage name="phone" component="div" className="text-black" />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                    {/* <button 
+                        className={`text-white p-4 rounded-md flex flex-row justify-center items-center ${!isValid || !dirty ? '' : ''}`} 
+                        type="submit"
+                        disabled={!isValid || !dirty || isSubmitting}
+                    >Edit</button> */}
+
+                    <button className={`
+                      text-sm text-[#333] p-2 px-8 rounded-md shadow-cButtonShadow 
+                      font-cinzelDecorative flex justify-center items-center
+                      bg-[#EAE5D9]
+                      
+                      ${!isValid || !dirty ? '' : 'hover:bg-[#333] hover:text-white hover:scale-110'}
+                      transition-all
+                      duration-500
+                      
+                      mt-6
+                      md:text-md
+                      lg:mt-2`}
+                      onClick={onHandleSend}
+                      type="submit"
+                        disabled={!isValid || !dirty || isSubmitting}
+                    >
+                      Reservar
+                    </button>
+                    
+                </div>
+
+
+            </div>
+        </Form>
+      )}
+    </Formik>
+        {/* <form className="flex flex-col justify-center items-center gap-2 mt-3">
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Nombre" />
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Apellidos" />
           <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="number" placeholder="Teléfono" />
@@ -58,7 +156,7 @@ const Modal: React.FC<ModalProps> = () => {
           >
             Reservar
           </button>
-        </form>
+        </form> */}
 		</div>
       </div>
     </div>
