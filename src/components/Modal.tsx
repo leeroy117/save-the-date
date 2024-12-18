@@ -4,6 +4,7 @@ import { useStore } from '@nanostores/react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export const validationCommentSchema = Yup.object({
   name: Yup.string().required('El Nombre es requerido'),
@@ -65,6 +66,28 @@ const Modal = () => {
             })
 
             console.log('response', response);
+            if(response.status !== 200){
+              Swal.fire({
+                title: "Error",
+                // icon: "error",
+                draggable: true,
+                text: "Hubo un error al enviar la información",
+                confirmButtonText: "Aceptar",
+                background: '#ddd4c0',
+                confirmButtonColor: '#333'
+              });
+            }
+
+            Swal.fire({
+              title: "Información enviada.",
+              // icon: "success",
+              draggable: true,
+              text: "Nos emociona que nos acompañes. Muy pronto recibirás más noticias.",
+              color: 'black',
+              confirmButtonText: "Aceptar",
+              background: '#ddd4c0',
+              confirmButtonColor: '#333'
+            });
             isModalOpen.set(!$isModalOpen)
           } catch (error) {
             console.log("🚀 ~ FormAddComment ~ error:", error)
@@ -141,27 +164,7 @@ const Modal = () => {
         </Form>
       )}
     </Formik>
-        {/* <form className="flex flex-col justify-center items-center gap-2 mt-3">
-          <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Nombre" />
-          <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="text" placeholder="Apellidos" />
-          <input className="lg:w-96 w-full rounded-sm h-8 flex flex-row justify-start items-center p-2 bg-[#EEE9DF]" type="number" placeholder="Teléfono" />
-          <button className="
-            text-sm text-[#333] p-2 px-8 rounded-md shadow-cButtonShadow 
-            font-cinzelDecorative flex justify-center items-center
-            bg-[#EAE5D9]
-            hover:bg-[#333]
-            hover:text-white
-            transition-all
-            duration-500
-            hover:scale-110
-            mt-6
-            md:text-md
-            lg:mt-2 "
-            onClick={onHandleSend}
-          >
-            Reservar
-          </button>
-        </form> */}
+
 		</div>
       </div>
     </div>
