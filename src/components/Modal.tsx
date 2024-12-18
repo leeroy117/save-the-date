@@ -59,7 +59,7 @@ const Modal = () => {
             // dispatch(updateComment({id: id, comment: values.comment, email: values.email}))
             // setSubmitting(false);
             // closeModal();
-            const response = await axios.post('https://app-fernandayernesto-api-8d26bea62337.herokuapp.com/invitados', {
+            const response = await axios.post('https://app-fernandayernesto-api-8d26bea62337.herokuapp.com/invitados/setInvitados', {
               "nombre": values.name,
               "apellidos": values.lastname,
               "telefono": values.phone
