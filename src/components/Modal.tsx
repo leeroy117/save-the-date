@@ -3,12 +3,7 @@ import { isModalOpen } from '../modalStore';
 import { useStore } from '@nanostores/react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-
-interface ModalProps {
-//   isOpen: boolean; 
-//   onClose: () => void; 
-  // children: React.ReactNode; 
-}
+import axios from 'axios';
 
 export const validationCommentSchema = Yup.object({
   name: Yup.string().required('El Nombre es requerido'),
@@ -19,13 +14,15 @@ export const validationCommentSchema = Yup.object({
   ),
 });
 
-const Modal: React.FC<ModalProps> = () => {
+const Modal = () => {
   const $isModalOpen = useStore(isModalOpen);
 
-  const onHandleSend = (e: any) => {
-    e.preventDefault();
-    isModalOpen.set(!$isModalOpen)
-  }
+  
+
+  // const onHandleSend = (e: any) => {
+  //   e.preventDefault();
+  //   isModalOpen.set(!$isModalOpen)
+  // }
 
   console.log('modalopen', $isModalOpen);
   return (
@@ -56,11 +53,19 @@ const Modal: React.FC<ModalProps> = () => {
           phone: '',
         }}
         validationSchema={validationCommentSchema}
-        onSubmit={(values, {setSubmitting}) => {
+        onSubmit={async (values, {setSubmitting}) => {
           try {
             // dispatch(updateComment({id: id, comment: values.comment, email: values.email}))
             // setSubmitting(false);
             // closeModal();
+            const response = await axios.post('https://app-fernandayernesto-api-8d26bea62337.herokuapp.com/invitados', {
+              "nombre": values.name,
+              "apellidos": values.lastname,
+              "telefono": values.phone
+            })
+
+            console.log('response', response);
+            isModalOpen.set(!$isModalOpen)
           } catch (error) {
             console.log("🚀 ~ FormAddComment ~ error:", error)
             
@@ -122,7 +127,7 @@ const Modal: React.FC<ModalProps> = () => {
                       mt-6
                       md:text-md
                       lg:mt-2`}
-                      onClick={onHandleSend}
+                      // onClick={onHandleSend}
                       type="submit"
                         disabled={!isValid || !dirty || isSubmitting}
                     >
